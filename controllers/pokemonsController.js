@@ -32,7 +32,7 @@ function responsePokemons (res, pokemons) {
 
 exports.getAllPokemons = (req, res) => {
     const name = req.query.name;
-    const pokemon = pokemons.find(el => el.name === name);
+    const pokemon = pokemons.filter(el => el.name === name);
     if (name !== undefined) {
         responsePokemon(res, pokemon)
     } else {
