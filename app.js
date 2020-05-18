@@ -35,7 +35,13 @@ function responsePokemons (res, pokemons) {
 }
 
 const getAllPokemons = (req, res) => {
-    responsePokemons(res, pokemons)
+    const name = req.query.name;
+    const pokemon = pokemons.find(el => el.name === name);
+    if (name !== undefined) {
+        responsePokemon(res, pokemon)
+    } else {
+        responsePokemons(res, pokemons)
+    }
 }
 
 const getCaughtPokemons = (req, res) => {
@@ -48,16 +54,6 @@ const getPokemonById = (req, res) => {
     const pokemon = pokemons.find(el => el.id === id);
     if (!pokemon) {
         responseFail(res, 'Invalid ID')
-        return
-    }
-    responsePokemon(res, pokemon)
-};
-
-const getPokemonByName = (req, res) => {
-    const name = req.params.name;
-    const pokemon = pokemons.find(el => el.name === name);
-    if (!pokemon) {
-        responseFail(res, 'Invalid name')
         return
     }
     responsePokemon(res, pokemon)
@@ -116,15 +112,12 @@ app
     .get(getCaughtPokemons)
 
 app
-    .route('/api/v1/pokemons/id/:id')
+    .route('/api/v1/pokemons/:id')
     .get(getPokemonById)
     .post(updatePokemon)
     .put(catchPokemon)
     .delete(deletePokemon)
 
-app
-    .route('/api/v1/pokemons/name/:name')
-    .get(getPokemonByName)
 
 const port = 3000;
 app.listen(port, () => {
