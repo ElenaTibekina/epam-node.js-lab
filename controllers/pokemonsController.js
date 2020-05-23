@@ -31,6 +31,14 @@ function responsePokemons (res, pokemons) {
     })
 }
 
+function responsePokemonCreated (res, pokemon) {
+    response(res, 201, 'success', { data: { pokemon: pokemon} })
+}
+
+function responsePokemonDeleted(res, pokemon) {
+    response(res, 204, 'success', { data: { pokemon: pokemon} })
+}
+
 exports.getAllPokemons = (req, res) => {
     const name = req.query.name;
     let query;
@@ -42,35 +50,10 @@ exports.getAllPokemons = (req, res) => {
     query.exec((err, pokemons) => {
         if (err) {
             responseFail(res, 'Bad request');
-            // res.status(500).json({
-            //     status: 'Bad request',
-            //     message: err
-            // })
         }
         responsePokemons(res, pokemons);
-        // res.status(200).json({
-        //     status: 'success',
-        //     results: pokemons.length,
-        //     data: {
-        //         pokemons
-        //     }
-        // })
     })
-
-    // const pokemon = pokemons.filter(el => el.name === name);
-    // if (name !== undefined) {
-    //     responsePokemon(res, pokemon)
-    // } else {
-    //     responsePokemons(res, pokemons)
-    // }
 }
-
-// todo: delete getCaught
-
-// exports.getCaughtPokemons = (req, res) => {
-//     const caughtPokemons = pokemons.filter(item => item.isCaught)
-//     responsePokemons(res, caughtPokemons)
-// };
 
 exports.getPokemonById = (req, res) => {
     const id = req.params.id;
@@ -80,19 +63,8 @@ exports.getPokemonById = (req, res) => {
             responseFail(res, 'Bad request');
         } else if (!pokemon) {
             responseBad(res, 'invalid ID')
-            // return res.status(404).json({
-            //     status: 'fail',
-            //     message: 'Invalid ID'
-            // })
         } responsePokemon(res, pokemon);
     })
-    // const id = parseInt(req.params.id);
-    // const pokemon = pokemons.find(el => el.id === id);
-    // if (!pokemon) {
-    //     responseFail(res, 'Invalid ID')
-    //     return
-    // }
-    // responsePokemon(res, pokemon)
 };
 
 exports.createNewPokemon = (req, res) => {
@@ -101,18 +73,12 @@ exports.createNewPokemon = (req, res) => {
         damage: '',
         isCaught: '',
         createdAt: '',
-        id: null,
         ...req.body
     };
     Pokemon.create(newPokemon, (err, pokemon) => {
         if (err) {
             responseFail(res, 'Bad request');
-        } res.status(201).json({
-            status: 'success',
-            data: {
-                pokemon
-            }
-        })
+        } responsePokemonCreated(res, pokemon);
     })
 };
 
@@ -130,30 +96,6 @@ exports.updatePokemon = (req, res) => {
         }
         responsePokemon(res, pokemon);
     })
-
-    // const id = parseInt(req.params.id);
-    // const pokemon = pokemons.find(el => el.id === id);
-    // if (parseInt(req.params.id) > pokemons.length) {
-    //     responseFail(res, 'Invalid ID')
-    //     return
-    // }
-    // const newPokemon = Object.assign(pokemon, req.body);
-    // writePokemons(err => {
-    //     responsePokemon(res, newPokemon)
-    // })
-};
-
-exports.catchPokemon = (req, res) => {
-    const id = parseInt(req.params.id);
-    const pokemon = pokemons.find(el => el.id === id);
-    if (parseInt(req.params.id) > pokemons.length) {
-        responseFail(res,  'Invalid ID')
-        return
-    }
-    pokemon.isCaught = true;
-    writePokemons(err => {
-        responsePokemon(res, pokemon)
-    })
 };
 
 exports.deletePokemon = (req, res) => {
@@ -161,24 +103,10 @@ exports.deletePokemon = (req, res) => {
    const query = Pokemon.findByIdAndDelete(id);
    query.exec((err, pokemon) => {
        if (err) {
-           return res.status(500).json({
-               status: 'Request failed',
-               message: err
-           })
+           return responseFail(res, 'bad request')
        } if (!pokemon) {
-           return res.status(404).json({
-               status: 'fail',
-               message: 'invalid id'
-           })
+           return responseFail(res, 'invalid id')
        }
-       res.status(204).json({
-           status: 'success',
-           data: null
-       })
+       responsePokemonDeleted(res, null);
    })
-    // if (parseInt(req.params.id) > pokemons.length) {
-    //     responseFail(res, 'Invalid ID')
-    //     return
-    // }
-    // responsePokemon(res, null)
 };
