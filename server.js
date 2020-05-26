@@ -13,7 +13,7 @@ const pokemons = JSON.parse(
 
 mongoose.connect(DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 app.listen(port, () => {
-    console.log(`App is running on port ${port}...`)
+    console.log(`App is running on port ${port}...`);
 });
 
 DB.once('open', () => {
@@ -34,13 +34,3 @@ function loadPokemons() {
     });
 }
 
-// function loadPokemons () {
-//     Pokemon.insertMany(pokemons, (err) => {
-//         console.log(pokemons);
-//         console.log(err);
-//         if (err) {
-//             console.log('Bad request');
-//         }
-//         console.log('Pokemons are loaded succesfully!')
-//     })
-// }
