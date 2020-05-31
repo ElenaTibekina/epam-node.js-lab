@@ -16,7 +16,7 @@ router
 router
   .route('/:id')
   .get(pokemonsController.getPokemonById)
-  .patch(pokemonsController.updatePokemon)
+  .patch(pokemonsController.catchPokemon)
   .delete(pokemonsController.deletePokemon);
 
 module.exports = router;

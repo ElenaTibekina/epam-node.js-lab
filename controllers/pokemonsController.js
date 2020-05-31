@@ -79,7 +79,7 @@ exports.createNewPokemon = (req, res) => {
   });
 };
 
-exports.updatePokemon = (req, res) => {
+exports.catchPokemon = (req, res) => {
   const id = req.params.id;
   const newPokemon = {
     ...req.body,

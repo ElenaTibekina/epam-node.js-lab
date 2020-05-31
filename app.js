@@ -7,7 +7,10 @@ const usersRouter = require('./routes/usersRoute');
 const app = express();
 
 // MIDDLEWARES
-app.use(morgan('dev'));
+// eslint-disable-next-line no-undef
+if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+}
 
 app.use(express.json());
 

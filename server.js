@@ -1,3 +1,6 @@
+const dotenv = require('dotenv');
+dotenv.config({path: './config.env'});
+
 const fs = require('fs');
 const app = require('./app');
 
@@ -5,8 +8,10 @@ const mongoose = require('mongoose');
 const Pokemon = require('./schemas/pokemon');
 const User = require('./schemas/user');
 const DB = mongoose.connection;
+
 const DB_URL = 'mongodb://localhost:27017/pokedex';
-const port = 3000;
+// eslint-disable-next-line no-undef
+const port = process.env.PORT || 3000;
 
 const pokemons = JSON.parse(
     fs.readFileSync('./pokemons.json')
