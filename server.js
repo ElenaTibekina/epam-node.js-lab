@@ -46,7 +46,7 @@ function loadPokemons() {
 }
 
 function loadUsers() {
-    User.insertMany(users, (err) => {
+    User.create(users, (err) => {
         if (err) {
             console.log('Request failed');
         }

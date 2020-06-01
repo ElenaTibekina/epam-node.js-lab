@@ -1,7 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
+const router = require('./routes/routes');
 
-const pokemonRouter = require('./routes/routes');
+// const pokemonRouter = require('./routes/routes');
 
 const app = express();
 
@@ -16,12 +17,7 @@ app.use((req, res, next) => {
 });
 
 // ROUTE
-app.use('/api/v1/pokemons', pokemonRouter);
+app.use('/', router);
 
 // START SERVER
 module.exports= app;
-
-
-
-
-
