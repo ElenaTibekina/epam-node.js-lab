@@ -1,5 +1,7 @@
 const express = require('express');
-const pokemonsController = require('./pokemonsRoute');
+const pokemonsRoute= require('./pokemonsRoute');
+const catchPokemonsRoute = require('./catchPokemonsRoute');
+const caughtPokemonsRoute = require('./caughtPokemonRoute');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const BearerStrategy = require('passport-http-bearer');
@@ -57,7 +59,8 @@ passport.use(
 );
 
 router.use('/auth', passport.authenticate('local', { session: false }), auth);
-
-router.use('/pokemons', passport.authenticate('bearer', { session: false }), pokemonsController);
+router.use('/pokemons', passport.authenticate('bearer', { session: false }), pokemonsRoute);
+router.use('/catch', passport.authenticate('bearer', { session: false }), catchPokemonsRoute);
+router.use('/caught', passport.authenticate('bearer', { session: false }), caughtPokemonsRoute);
 
 module.exports = router;
