@@ -2,8 +2,6 @@ const express = require('express');
 const morgan = require('morgan');
 const router = require('./routes/routes');
 
-// const pokemonRouter = require('./routes/routes');
-
 const app = express();
 
 // MIDDLEWARES
