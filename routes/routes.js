@@ -11,11 +11,6 @@ const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-// router.param('id', (req, res, next, val) => {
-//   console.log(`Pokemon id is: ${val}`);
-//   next();
-// });
-
 function verifyJWT(token) {
   let isValid = false;
   if (token) {
