@@ -13,7 +13,7 @@ app.use(express.json());
 app.use((req, res, next) => {
     console.log('hello from the middleware');
     next();
-})
+});
 
 // ROUTE
 app.use('/api/v1/pokemons', pokemonRouter);

@@ -7,6 +7,6 @@ const PokemonSchema = new Schema({
     damage: Number,
     isCaught: Boolean,
     createdAt: String
-})
+});
 
 module.exports = mongoose.model('Pokemon', PokemonSchema);
