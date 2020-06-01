@@ -1,5 +1,5 @@
 const express = require('express');
-const pokemonsController = require('../controllers/pokemonsController');
+const pokemonsController = require('./pokemonsRoute');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const BearerStrategy = require('passport-http-bearer');
