@@ -20,6 +20,13 @@ describe('pokemons service', () => {
             'damage': 0,
             'isCaught': false,
             'createdAt': '2020-04-15'
+        },
+        {
+            'name': 'venusaur',
+            'id': 3,
+            'damage': 0,
+            'isCaught': false,
+            'createdAt': '2020-04-15'
         }
     ];
 
