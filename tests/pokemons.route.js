@@ -4,7 +4,7 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('Read (getting all)', () => {
+describe('getting-pokemons route', () => {
     it('Should get all pokemons', () => {
         chai
             .request('http://localhost:8000')
